@@ -1,0 +1,464 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!--    <div class="row">-->
+<!--     <div class="col-12">-->
+<!--        <div class="card card-chart">-->
+<!--          <div class="card-header ">-->
+<!--            <div class="row">-->
+<!--               <div class="col-lg-6">-->
+<!--                <h2 class="card-title">Analysis Of traffic</h2>-->
+<!--          <div class="card-body">-->
+<!--            <div class="chart-area">-->
+<!--              <canvas id="chartBig" width="200" height="100"></canvas>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--                   </div>-->
+<!--                 <div class="col-lg-6">-->
+<!--                <h2 class="card-title">Normal Connection</h2>-->
+<!--                     <div class="card-body">-->
+<!--            <div class="chart-area">-->
+<!--              <canvas id="chartBig1" width="200" height="100"></canvas>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--            </div>-->
+<!--    </div>-->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category">Analysis Of traffic</h5>
+<!--            <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 763,215</h3>-->
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="chartBig"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category">Normal Connection</h5>
+<!--            <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500€</h3>-->
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="chartBig1"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category">Traffic Analysis</h5>
+<!--            <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 763,215</h3>-->
+          </div>
+          <div class="card-body">
+            <div class="chart-area"  style="position: relative; height:30vh; width:30vw">
+              <canvas id="chartLinePurple"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card card-chart">
+          <div class="card-header">
+            <h5 class="card-category">Network Traffic Analysis</h5>
+<!--            <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500€</h3>-->
+          </div>
+<!--          <div class="card-body">-->
+<!--            <div class="chart-area">-->
+<!--              <canvas id="CountryChart"></canvas>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-4">-->
+<!--        <div class="card card-chart">-->
+<!--          <div class="card-header">-->
+<!--            <h5 class="card-category">Network Mointoring</h5>-->
+<!--&lt;!&ndash;            <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100K</h3>&ndash;&gt;-->
+<!--          </div>-->
+          <div class="card-body">
+            <div class="chart-area" style="position: relative; height:30vh; width:35vw">
+              <canvas id="chartLineGreen"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script>
+  gradientBarChartConfiguration = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        backgroundColor: '#f5f5f5',
+        titleFontColor: '#333',
+        bodyFontColor: '#666',
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.1)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 3,
+            padding: 1,
+            fontColor: "#9e9e9e"
+          }
+        }],
+
+        xAxes: [{
+
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.1)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9e9e9e"
+          }
+        }]
+      }
+    };
+  gradientChartOptionsConfigurationWithTooltipGreen = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: '#f5f5f5',
+        titleFontColor: '#333',
+        bodyFontColor: '#666',
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.0)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 3,
+            padding: 1,
+            fontColor: "#9e9e9e"
+          }
+        }],
+
+        xAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(0,242,195,0.1)',
+            zeroLineColor: "transparent",
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9e9e9e"
+          }
+        }]
+      }
+    };
+    gradientChartOptionsConfigurationWithTooltipPurple = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        backgroundColor: '#f5f5f5',
+        titleFontColor: '#333',
+        bodyFontColor: '#666',
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.0)',
+<!--            zeroLineColor: "transparent",-->
+          },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 3,
+            padding: 1,
+            fontColor: "#9a9a9a"
+          }
+        }],
+
+        xAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(225,78,202,0.1)',
+<!--            zeroLineColor: "transparent",-->
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9a9a9a"
+          }
+        }]
+      }
+    };
+
+    gradientChartOptionsConfigurationWithTooltipPurple1 = {
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+
+      tooltips: {
+        backgroundColor: '#f5f5f5',
+        titleFontColor: '#333',
+        bodyFontColor: '#666',
+        bodySpacing: 4,
+        xPadding: 12,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest"
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(29,140,248,0.0)',
+<!--            zeroLineColor: "transparent",-->
+          },
+          ticks: {
+            suggestedMin: 2,
+            suggestedMax: 15,
+            padding: 1,
+            fontColor: "#9a9a9a"
+          }
+        }],
+
+        xAxes: [{
+          barPercentage: 1.6,
+          gridLines: {
+            drawBorder: false,
+            color: 'rgba(225,78,202,0.1)',
+<!--            zeroLineColor: "transparent",-->
+          },
+          ticks: {
+            padding: 20,
+            fontColor: "#9a9a9a"
+          }
+        }]
+      }
+      };
+  var colorArray = ["#2a8482","#64DECF","#BCCDF8"];
+<!--  var colorArray = [-->
+<!--    '#dd0453', '#fdfd05', '#66E64D', '#0660e7', '#9900B3',-->
+<!--     '#d07201', '#14b300','#06d2a6','#f8061a','#c45850',-->
+<!--	'#66664D', '#d6d6d7', '#76008f', '#4DB3FF', '#1AB399',-->
+<!--	'#ec92d1', '#33991A', '#ba8383', '#B3B31A', '#00E680',-->
+<!--	'#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',-->
+<!--	'#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];-->
+    new Chart(document.getElementById("chartLinePurple"), {
+    responsive: true,
+    type: 'pie',
+    data: {
+
+ labels:  {{ listkeys1|safe }},
+      datasets: [{
+        label: "",
+        backgroundColor: colorArray,
+       data: {{ listvalues1|safe }}
+      }]
+    },
+    options: {
+      title: {
+<!--        display: false,-->
+        text: 'Visualization'
+      }
+    }
+});
+
+<!--var ctx1 = document.getElementById('chartLineGreen').getContext("2d")-->
+<!--var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);-->
+
+<!--    gradientStroke1.addColorStop(1, 'rgba(66,134,121,0.15)');-->
+<!--    gradientStroke1.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors-->
+<!--    gradientStroke1.addColorStop(0, 'rgba(66,134,121,0)');-->
+<!--var myChart = new Chart(ctx1, {-->
+<!--    type: 'line',-->
+<!--    data: {-->
+<!--        labels: {{ listkeys|safe }},-->
+<!--        datasets: [{-->
+<!--            label: "Data",-->
+<!--            fill: true,-->
+<!--            backgroundColor: gradientStroke1,-->
+<!--            borderColor: '#00d6b4',-->
+<!--            borderWidth: 2,-->
+<!--            borderDash: [],-->
+<!--            borderDashOffset: 0.0,-->
+<!--            pointBackgroundColor: '#00d6b4',-->
+<!--            pointBorderColor: 'rgba(255,255,255,0)',-->
+<!--            pointHoverBackgroundColor: '#00d6b4',-->
+<!--            pointBorderWidth: 20,-->
+<!--            pointHoverRadius: 4,-->
+<!--            pointHoverBorderWidth: 15,-->
+<!--            pointRadius: 4,-->
+<!--            data: {{ listvalues|safe }}-->
+<!--        }]-->
+<!--    },-->
+<!--    options: gradientChartOptionsConfigurationWithTooltipGreen-->
+<!--});-->
+
+var ctx2 = document.getElementById('chartLineGreen').getContext("2d")
+var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(29,140,248,0.2)');
+    gradientStroke2.addColorStop(0.4, 'rgba(29,140,248,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
+
+var myChart = new Chart(ctx2, {
+    type: 'bar',
+    responsive: true,
+
+    legend: {
+        display: false
+      },
+    data: {
+        labels: {{ listkeys|safe }},
+        datasets: [{
+            label: "Data",
+            fill: true,
+            fill: true,
+            backgroundColor: gradientStroke2,
+            hoverBackgroundColor: gradientStroke2,
+            borderColor: '#1f8ef1',
+            borderWidth: 2,
+            borderDash: [],
+            borderDashOffset: 0.0,
+            data: {{ listvalues|safe }}
+        }]
+    },
+    options: gradientBarChartConfiguration
+});
+
+
+
+
+
+
+
+var ctx = document.getElementById('chartBig').getContext("2d")
+var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+    gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+    gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+var myChart = new Chart(ctx, {
+
+    type: 'line',
+    data: {
+        labels: {{ listkeys|safe }},
+        datasets: [{
+            label: "Data",
+            backgroundColor: gradientStroke,
+            fill: true,
+              backgroundColor: gradientStroke,
+              borderColor: '#1585ec',
+              borderWidth: 2,
+
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: '#1585ec',
+              pointBorderColor: 'rgba(255,255,255,0)',
+              pointHoverBackgroundColor: '#d346b1',
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+            data: {{ listvalues|safe }}
+        }]
+    },
+    options: gradientChartOptionsConfigurationWithTooltipPurple
+});
+var ctx = document.getElementById('chartBig1').getContext("2d")
+var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+    gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+    gradientStroke.addColorStop(0, 'rgba(119,52,169,0)');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ listkeys_no|safe }},
+        datasets: [{
+            label: "Data",
+            backgroundColor: gradientStroke,
+            fill: true,
+              backgroundColor: gradientStroke,
+              borderColor: '#1585ec',
+              borderWidth: 2,
+
+              borderDash: [],
+              borderDashOffset: 0.0,
+              pointBackgroundColor: '#1585ec',
+              pointBorderColor: 'rgba(255,255,255,0)',
+              pointHoverBackgroundColor: '#d346b1',
+              pointBorderWidth: 20,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 15,
+              pointRadius: 4,
+            data: {{ listvalues_no|safe }}
+        }]
+    },
+    options: gradientChartOptionsConfigurationWithTooltipPurple1
+});
+
+
+  </script>
+
+{% endblock javascripts %}

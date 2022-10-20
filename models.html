@@ -1,0 +1,108 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Icons {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!--<div class="row">-->
+<!--  <div class="col-md-12">-->
+<!--    <div class="card">-->
+<!--      <div class="card-header">-->
+<!--        <h5 class="title">MODEL VERIFICATION</h5>-->
+<!--          <form action="download" method="POST">-->
+<!--        {% csrf_token %}-->
+<!--            <input type="submit" name="classifier_multi_NB" value="Gaussian Naive Bayes" class="btn btn-success">-->
+<!--                       <input type="submit" name="classifier_multi_DT" value="Decison Tree" class="btn btn-success">-->
+
+<!--          </form>-->
+
+
+
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h4 class="card-title">Malicious Traffic</h4>
+      </div>
+      <div class="card-body">
+
+
+
+
+        <div class="table-responsive">
+          <table class="table tablesorter " id="">
+    <thead class=" text-primary" >
+      <tr>
+        <th>duration</th>
+        <th >Protocol</th>
+        <th >service</th>
+        <th > Prediction </th>
+
+        <!-- <th class="th-lg">Visitor_CNIC</th>
+        <th class="th-lg">Visitor_Mobile</th>
+        <th class="th-lg">Visitor_Company</th>
+        <th class="th-lg">Visitor_Address</th>
+        <th class="th-lg">Meeting_with</th> -->
+        <!-- <th class="th-lg">Department_ID</th> -->
+        <!-- <th class="th-lg">Check_In</th>
+        <th class="th-lg">Check_Out</th>
+        <th class="th-lg">Purpose_of_meeting</th>
+        <th class="th-lg">Actions</th> -->
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for vis in allData  %}
+      <tr>
+
+<!--         <td>0</td>-->
+       <td>{{vis.duration}}</td>
+        <td>{{vis.protocol_type}}</td>
+        <td>{{vis.service}}</td>
+         <td>{{vis.prediction}}</td>
+		<!-- <td>{{vis.Visitor_CNIC}}</td>
+		<td>{{vis.Visitor_Mobile}}</td>
+        <td>{{vis.Visitor_Company}}</td>
+        <td>{{vis.Visitor_Address}}</td>
+        <td>{{vis.Meeting_With}}</td> -->
+        <!-- <td>{{vis.Department_ID_id}}</td> -->
+        <!-- <td>{{vis.Department_Name}}</td> -->
+        <!-- <td>{{vis.Check_In}}</td>
+        <td>{{vis.Check_Out}}</td>
+        <td>{{vis.Purpose_Of_Meeting}}</td> -->
+
+<!--    <td class="btn" >-->
+<!--      <a href="/editvisitor/{{ vis.Visitor_ID }}"><span class="btn btn-success">Edit</span></a>-->
+<!--      <a href="/deletevisitor/{{ vis.Visitor_ID }}"><span class="btn btn-danger">Delete </span></a>-->
+<!--      <a href="/CheckOutvisitor/{{ vis.Visitor_ID }}" class="btn btn-primary">CheckOut</a>-->
+<!--    </td>-->
+  </tr>
+{% endfor %}
+
+
+    </tbody>
+
+  </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
